@@ -1,0 +1,27 @@
+build --incompatible_enable_cc_toolchain_resolution
+
+# Performance settings
+build --disk_cache=~/.cache/bazel-disk-cache
+build --jobs=auto
+
+# Errors formatting
+build --color=yes
+build --show_timestamps
+
+# Configs for platforms
+build:linux --platforms=//bazel/platforms:linux_x86_64
+build:qemu --platforms=//bazel/platforms:qnx_x86_64
+build:raspberry --platforms=//bazel/platforms:qnx_arm64
+build:rpi --config=raspberry
+
+# Compiler flags
+build:linux --cxxopt=-std=c++17
+build:linux --cxxopt=-Wall
+build:linux --cxxopt=-Wextra
+build:linux --cxxopt=-Werror=return-type
+build:linux --copt=-Wall
+build:linux --copt=-Wextra
+build:linux --copt=-Werror=return-type
+
+# Needed to get full compilation output
+build --strategy=CppCompile=local

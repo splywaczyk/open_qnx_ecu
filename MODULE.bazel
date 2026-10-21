@@ -7,6 +7,30 @@
 module(
     name = "open-qnx-ecu",
     version = "0.1.0",
+    repo_name = "open_qnx_ecu",
 )
 
+# Basic dependencies
 bazel_dep(name = "platforms", version = "1.1.0")
+bazel_dep(name = "rules_cc", version = "0.2.26")
+
+# LLVM Toolchain (Host / Linux x86_64)
+bazel_dep(name = "toolchains_llvm", version = "1.12.0")
+
+llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+llvm.toolchain(
+    name = "llvm_toolchain",
+    llvm_version = "17.0.6",  # stable support for C++17
+)
+use_repo(llvm, "llvm_toolchain")
+
+# QNX SDP
+
+qnx_sdp_extension = use_extension("//third_party/qnx_sdp:qnx_sdp.bzl", "qnx_sdp_extension")
+use_repo(qnx_sdp_extension, "qnx_sdp")
+
+# Register toolchains
+
+register_toolchains("@llvm_toolchain//:all")
+
+register_toolchains("//bazel/toolchains/qnx/qcc:cc_toolchain_for_qnx_x86_64")
