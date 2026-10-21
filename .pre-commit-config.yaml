@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.6
+    hooks:
+      - id: remove-crlf # Replace CRLF end-lines by LF ones before committing
+      - id: remove-tabs # Replace tabs by whitespaces before committing
+
+      - id: insert-license
+        name: Insert SPDX & Copyright (C++)
+        files: \.(cpp|hpp|c|h)$
+        args:
+          - --license-filepath
+          - .license_header.txt
+          - --comment-style
+          - //
+
+      - id: insert-license
+        name: Insert SPDX & Copyright (Bazel & Scripts)
+        files: (\.bzl|\.build|\.sh)$|BUILD|BUILD\.bazel$|MODULE\.bazel$
+        args:
+          - --license-filepath
+          - .license_header.txt
+
+      - id: insert-license
+        name: Insert SPDX & Copyright (secpol)
+        files: \.secpol$
+        args:
+          - --license-filepath
+          - .license_header.txt
+          - --comment-style
+          - //
+
+      - id: insert-license
+        name: Insert SPDX & Copyright (Markdown)
+        files: \.md$
+        args:
+          - --license-filepath
+          - .license_header.txt
+          - --comment-style
+          - <!--|  ~|  -->

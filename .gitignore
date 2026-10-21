@@ -1,0 +1,117 @@
+# ------------------------------------------------------------------------------
+# 1. Bazel Build Outputs & Symlinks
+# ------------------------------------------------------------------------------
+bazel-*
+/bazel-bin
+/bazel-out
+/bazel-testlogs
+/bazel-open-qnx-ecu
+
+.bazelrc.local
+user.bazelrc
+*.user.bazelrc
+
+# ------------------------------------------------------------------------------
+# 2. QNX SDP, Proprietary Artifacts & License Protection
+# ------------------------------------------------------------------------------
+*.lic
+*license*.txt
+qnxsdp-env.sh
+
+*.ifs
+*.sym
+*.bto
+
+*.secpol.bin
+secpol.bin
+
+/qnx_sdk/
+/qnx_target/
+/qnx_host/
+
+# ------------------------------------------------------------------------------
+# 3. Security, Keys & Certificates (Chain of Trust / Secure Boot)
+# ------------------------------------------------------------------------------
+*.key
+*.pem
+*.priv
+*.pkcs12
+*.pfx
+
+!security/keys/*.pub.pem
+!security/keys/*.crt
+
+*.sig
+*.sha256
+
+# ------------------------------------------------------------------------------
+# 4. Hypervisor, Virtualization & Guest OS (QEMU / Alpine)
+# ------------------------------------------------------------------------------
+*.qcow2
+*.img
+*.raw
+*.iso
+*.vmdk
+
+hypervisor/guest_rootfs/*.cpio.gz
+hypervisor/guest_rootfs/vmlinuz*
+hypervisor/guest_rootfs/initramfs*
+
+qemu.log
+serial.log
+*.trace
+
+# ------------------------------------------------------------------------------
+# 5. C++ & Tooling (Clang, GCC, LSP)
+# ------------------------------------------------------------------------------
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+
+compile_commands.json
+.cache/
+.clangd/
+
+core
+core.*
+*.dSYM/
+*.gdb
+
+# ------------------------------------------------------------------------------
+# 6. Python, Pre-commit & Scripts
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+ENV/
+.pre-commit-cache/
+
+# ------------------------------------------------------------------------------
+# 7. IDEs & Editors
+# ------------------------------------------------------------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Vim / Emacs / Nano
+*~
+*.swp
+*.swo
+.#*
+
+# ------------------------------------------------------------------------------
+# 8. OS-specific files
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
